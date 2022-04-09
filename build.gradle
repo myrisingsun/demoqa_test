@@ -11,11 +11,11 @@ repositories {
 
 
     dependencies {
-    testImplementation (
+    testImplementation ( // эти зависимости именно для тестов (не должны попадать в финальную сборку самого приложения.  Для самого кода нужно использовать Implementation ()
             "com.codeborne:selenide:6.3.5", // здесь подключаются пакеты и версии их берутся из переменных
             "org.junit.jupiter:junit-jupiter:5.8.2")
 }
 
 test {
-    useJUnitPlatform()
+    useJUnitPlatform() //указание gradle какой фреймворк используется
 }
