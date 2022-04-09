@@ -8,7 +8,6 @@ public class SimpleTest {
     @BeforeEach
     void openWebPage (){
         Selenide.open("http://www.ya.ru/");
-
     }
 
     @AfterEach
