@@ -1,0 +1,21 @@
+plugins {
+    id 'java-library' // использование язвка Java
+}
+
+repositories {
+    mavenCentral() // ссылка на репозиторий Maven
+}
+
+//def selenideVersion = "6.3.5", // переменные определяющие версии пакетов
+//    junitVersion = "5.8.2",
+
+
+    dependencies {
+    testImplementation (
+            "com.codeborne:selenide:6.3.5", // здесь подключаются пакеты и версии их берутся из переменных
+            "org.junit.jupiter:junit-jupiter:5.8.2")
+}
+
+test {
+    useJUnitPlatform()
+}
