@@ -10,8 +10,7 @@ public class TestPracticeForm {
 
     @Test
     void fillFormTest (){
-        open ("https://demoqa.com/automation-practice-form");
-
+        open ("https://demoqa.com/automation-practice-form"); // команда открывает страницу,закрытие автоматическое
     }
 
 }
