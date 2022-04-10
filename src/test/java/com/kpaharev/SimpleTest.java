@@ -1,7 +1,5 @@
 package com.kpaharev;
 
-// Изучение работы  JUnit5 по уроку https://qa.guru/pl/teach/control/lesson/view?id=236519080&editMode=0
-
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.*;
 
