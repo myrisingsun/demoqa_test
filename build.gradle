@@ -14,8 +14,13 @@ repositories {
     testImplementation ( // эти зависимости именно для тестов (не должны попадать в финальную сборку самого приложения.  Для самого кода нужно использовать Implementation ()
             "com.codeborne:selenide:6.3.5", // здесь подключаются пакеты и версии их берутся из переменных
             "org.junit.jupiter:junit-jupiter:5.8.2",
-            "org.slf4j:slf4j-simple:1.7.36" // это библиотека для логирования. снимает alert при запуске теста
+            "org.slf4j:slf4j-simple:1.7.36",// это библиотека для логирования. снимает alert при запуске теста
+            "com.github.javafaker:javafaker:1.0.2" // это библиотека для автоматической генерации данных Faker
     )
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
 
 test {

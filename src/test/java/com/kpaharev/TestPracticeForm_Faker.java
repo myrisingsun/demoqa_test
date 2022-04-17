@@ -8,21 +8,20 @@ import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.open;
 import static com.kpaharev.RandomUtils.getRandomEmail;
 import static com.kpaharev.RandomUtils.getRandomString;
 
 
-public class TestPracticeForm {
+public class TestPracticeForm_Faker {
 
-    String firstName = getRandomString(10),
-            lastName = getRandomString(10),
-            userEmail = getRandomEmail(),
+    Faker faker = new Faker();
+
+    String firstName = faker.name().firstName(),
+            lastName = faker.name().lastName(),
+            userEmail = faker.internet().emailAddress(),
 
     //String firstName = "Иван",
     //        lastName = "Ivanov",
