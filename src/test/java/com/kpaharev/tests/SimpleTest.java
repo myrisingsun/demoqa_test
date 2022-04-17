@@ -1,4 +1,4 @@
-package com.kpaharev;
+package com.kpaharev.tests;
 
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.*;

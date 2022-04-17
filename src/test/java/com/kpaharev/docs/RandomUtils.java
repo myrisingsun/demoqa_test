@@ -1,4 +1,4 @@
-package com.kpaharev;
+package com.kpaharev.docs;
 
 import java.util.Random;
 
