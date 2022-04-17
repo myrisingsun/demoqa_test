@@ -1,4 +1,4 @@
-package com.kpaharev;
+package com.kpaharev.tests;
 
 // Класс на тестирование функционала формы https://demoqa.com/automation-practice-form
 
@@ -7,19 +7,40 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.lang.management.OperatingSystemMXBean;
+
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.open;
+import static com.kpaharev.docs.RandomUtils.getRandomEmail;
+import static com.kpaharev.docs.RandomUtils.getRandomString;
 
 
 public class TestPracticeForm {
 
+    String firstName = getRandomString(10),
+            lastName = getRandomString(10),
+            userEmail = getRandomEmail(),
+
+    //String firstName = "Иван",
+    //        lastName = "Ivanov",
+    //        userEmail = "ivanivanov@gmail.com",
+
+            userSex = "Male",
+            userBirthMonth = "March",
+            userBirthYear = "1983",
+            userBirthDay = "30",
+            userCellPhoneNumber = "896211111123",
+            userSubjects = "Maths",
+            userHobby = "Music",
+            userState = "NCR",
+            userCity = "Delhi",
+            userAddress = "Some street and house";
+
     @BeforeAll
     static void setUp (){
-        Configuration.browser = "chrome";
+        //Configuration.browser = "opera";
         Configuration.holdBrowserOpen = true; //конфигурация selenium не закрывающая браузер
         Configuration.baseUrl = "https://demoqa.com"; // базовый URL. В тестах уже относительный к базовому
         Configuration.browserSize = "1920x1080"; // размер она открываемого браузера, но не масштаб
@@ -29,19 +50,7 @@ public class TestPracticeForm {
     @Test
     void fillFormTest (){
 
-        String firstName = "Ivan";
-        String lastName = "Ivanov";
-        String userEmail = "ivanivanov@gmail.com";
-        String userSex = "Male";
-        String userBirthMonth = "March";
-        String userBirthYear = "1983";
-        String userBirthDay = "30";
-        String userCellPhoneNumber = "896211111123";
-        String userSubjects = "Maths";
-        String userHobby = "Music";
-        String userState = "NCR";
-        String userCity = "Delhi";
-        String userAdress = "Some street and house";
+
 
 
 
@@ -50,8 +59,9 @@ public class TestPracticeForm {
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('fixedban').remove()");
 
-        Selenide.zoom(0.5);
 
+        Selenide.zoom(0.98);
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         //если выбираем Id -то используем #,  если класс то .
         $(".main-header").shouldHave(text("Practice Form"));
         $("#firstName").setValue(firstName); //$ - Означает сущность веб элемента firstName - это id на страницк данного элемента
@@ -64,11 +74,10 @@ public class TestPracticeForm {
         $(".react-datepicker__year-select").selectOption(userBirthYear);
         $(".react-datepicker__day--030:not(react-datepicker__day--outside-month)").click(); // not - Это исключение из CSS селектора, мы выбираем 30 -е число именно марта, а не предыдущего месяца
         $("#subjectsInput").setValue(userSubjects).pressEnter();
-        //$("#hobbiesWrapper").$(byText(userHobby)).click();
-        //$("#hobbiesWrapper").$(byText("Sports")).click(); // выбор хобби
+        $("#hobbiesWrapper").$(byText(userHobby)).click(); // выбор хобби
         $("#uploadPicture").uploadFromClasspath("img/1.jpg");
         //$("#uploadPicture").uploadFile(new File ("src/test/resources/img/1.jpg"));
-        $("#currentAddress").setValue(userAdress);
+        $("#currentAddress").setValue(userAddress);
 
         //$("[id=dateOfBirthInput]").setValue("01 Apr 1983");
         //$("[id=hobbies-checkbox-2").click();
@@ -78,17 +87,27 @@ public class TestPracticeForm {
         $(byText(userCity)).click();
         $("#submit").click();
 
+        //$("#state").click();
+        //$(byText(userState)).click();
+        //$("#city").click();
+        //$(byText(userCity)).click();
+        //$("#city").click();
+        //$("#submit").click();
+
+
+
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(
                 text(firstName + " " + lastName),
                 text(userEmail),
                 text(userSex),
                 text(userCellPhoneNumber),
-                //text(day + " " + month + "," + year),
+                text(userBirthDay + " " + userBirthMonth + "," + userBirthYear),
                 text(userSubjects),
-                //text(hobby),
-                text("1.jpg"));
-                //text(userAdress),
-                //text(userState + " " + userCity));
-        //$("#closeLargeModal").click();
+                text(userHobby),
+                text("1.jpg"),
+                text(userAddress),
+                text(userState + " " + userCity));
+        $("#closeLargeModal").click();
     }
 }
