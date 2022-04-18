@@ -5,7 +5,9 @@ package com.kpaharev.tests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.github.javafaker.Faker;
+import com.kpaharev.pages.RegistrationFormPage;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -16,19 +18,17 @@ import static com.codeborne.selenide.Selenide.*;
 public class TestPracticeFormFaker {
 
     Faker faker = new Faker();
+    RegistrationFormPage registrationFormPage = new RegistrationFormPage();
 
     String firstName = faker.name().firstName(),
             lastName = faker.name().lastName(),
             userEmail = faker.internet().emailAddress(),
-
-    //String firstName = "Иван",
-    //        lastName = "Ivanov",
-    //        userEmail = "ivanivanov@gmail.com",
-
+            expectedfullName = String.format("%s %s", firstName, lastName),
             userSex = "Male",
             userBirthMonth = "March",
             userBirthYear = "1983",
             userBirthDay = "30",
+            //dateOfBirth = String.format("%s %s,%s", userBirthDay, userBirthMonth, userBirthYear),
             userCellPhoneNumber = "896211111123",
             userSubjects = "Maths",
             userHobby = "Music",
@@ -36,29 +36,24 @@ public class TestPracticeFormFaker {
             userCity = "Delhi",
             userAddress = "Some street and house";
 
+    @DisplayName("Setup of test")
     @BeforeAll
     static void setUp (){
         //Configuration.browser = "opera";
         Configuration.holdBrowserOpen = true; //конфигурация selenium не закрывающая браузер
         Configuration.baseUrl = "https://demoqa.com"; // базовый URL. В тестах уже относительный к базовому
         Configuration.browserSize = "1920x1080"; // размер она открываемого браузера, но не масштаб
+        }
 
-    }
-
+    @DisplayName("Fill form")
     @Test
-    void fillFormTest (){
+    void openPage (){
+        registrationFormPage.OpenPage(); // содержимое вынесено в отдельный класс в файле RegistrationFormPage.java
+        registrationFormPage.TitleCheck();
+        registrationFormPage.setFirstName(firstName)
+                            .setLastName(lastName);
 
-        open ("/automation-practice-form"); // команда открывает страницу,закрытие автоматическое
 
-        executeJavaScript("$('footer').remove()");
-        executeJavaScript("$('fixedban').remove()");
-
-
-        Selenide.zoom(0.98);
-        $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        //если выбираем Id -то используем #,  если класс то .
-        $(".main-header").shouldHave(text("Practice Form"));
-        $("#firstName").setValue(firstName); //$ - Означает сущность веб элемента firstName - это id на страницк данного элемента
         $("#lastName").setValue(lastName); // Ctrl+D добавляет строку (копирует)
         $("#userEmail").setValue(userEmail);
         $("#genterWrapper").$(byText(userSex)).click(); //выбор всего элемента с RadioButton, а не отдельной RadioButton
@@ -81,18 +76,9 @@ public class TestPracticeFormFaker {
         $(byText(userCity)).click();
         $("#submit").click();
 
-        //$("#state").click();
-        //$(byText(userState)).click();
-        //$("#city").click();
-        //$(byText(userCity)).click();
-        //$("#city").click();
-        //$("#submit").click();
-
-
-
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(
-                text(firstName + " " + lastName),
+                text(expectedfullName),
                 text(userEmail),
                 text(userSex),
                 text(userCellPhoneNumber),
@@ -104,4 +90,7 @@ public class TestPracticeFormFaker {
                 text(userState + " " + userCity));
         $("#closeLargeModal").click();
     }
+
+
 }
+
