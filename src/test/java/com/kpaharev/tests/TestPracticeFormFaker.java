@@ -51,13 +51,11 @@ public class TestPracticeFormFaker {
         registrationFormPage.OpenPage(); // содержимое вынесено в отдельный класс в файле RegistrationFormPage.java
         registrationFormPage.TitleCheck();
         registrationFormPage.setFirstName(firstName)
-                            .setLastName(lastName);
+                            .setLastName(lastName)
+                            .setUserEmail(userEmail)
+                            .setUserSex(userSex)
+                            .setUserCellPhoneNumber(userCellPhoneNumber);
 
-
-        $("#lastName").setValue(lastName); // Ctrl+D добавляет строку (копирует)
-        $("#userEmail").setValue(userEmail);
-        $("#genterWrapper").$(byText(userSex)).click(); //выбор всего элемента с RadioButton, а не отдельной RadioButton
-        $("#userNumber").setValue(userCellPhoneNumber);
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption(userBirthMonth);
         $(".react-datepicker__year-select").selectOption(userBirthYear);
@@ -88,7 +86,7 @@ public class TestPracticeFormFaker {
                 text("1.jpg"),
                 text(userAddress),
                 text(userState + " " + userCity));
-        $("#closeLargeModal").click();
+        $("#submit").click();
     }
 
 

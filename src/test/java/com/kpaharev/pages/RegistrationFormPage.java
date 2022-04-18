@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationFormPage {
@@ -31,6 +32,18 @@ public class RegistrationFormPage {
     }
     public RegistrationFormPage setLastName(String lastName){
         $("#lastName").setValue(lastName);
+        return this;
+    }
+    public RegistrationFormPage setUserEmail(String userEmail){
+        $("#userEmail").setValue(userEmail);
+        return this;
+    }
+    public RegistrationFormPage setUserSex(String userSex){
+        $("#genterWrapper").$(byText(userSex)).click(); //выбор всего элемента с RadioButton, а не отдельной RadioButton
+        return this;
+    }
+    public RegistrationFormPage setUserCellPhoneNumber(String userCellPhoneNumber){
+        $("#userNumber").setValue(userCellPhoneNumber);
         return this;
     }
 
