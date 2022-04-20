@@ -23,18 +23,21 @@ public class TestPracticeFormFaker {
     String firstName = faker.name().firstName(),
             lastName = faker.name().lastName(),
             userEmail = faker.internet().emailAddress(),
-            expectedfullName = String.format("%s %s", firstName, lastName),
+            expectedFullName = String.format("%s %s", firstName, lastName),
             userSex = "Male",
             userBirthMonth = "March",
             userBirthYear = "1983",
             userBirthDay = "30",
             //dateOfBirth = String.format("%s %s,%s", userBirthDay, userBirthMonth, userBirthYear),
-            userCellPhoneNumber = "896211111123",
+            userCellPhoneNumber = "0123456789",
             userSubjects = "Maths",
             userHobby = "Music",
+            userPicture = "img/1.jpg",
+            userExpectedPicture = "1.jpg",
             userState = "NCR",
             userCity = "Delhi",
-            userAddress = "Some street and house";
+            userAddress = "Some street and house",
+            resultFormTitle = "Thanks for submitting the form";
 
     @DisplayName("Setup of test")
     @BeforeAll
@@ -54,39 +57,28 @@ public class TestPracticeFormFaker {
                             .setLastName(lastName)
                             .setUserEmail(userEmail)
                             .setUserSex(userSex)
-                            .setUserCellPhoneNumber(userCellPhoneNumber);
+                            .setUserCellPhoneNumber(userCellPhoneNumber)
+                            .setDateOfBirth(userBirthDay, userBirthMonth, userBirthYear)
+                            .setUserSubjects(userSubjects)
+                            .setUserHobbies(userHobby)
+                            .setUserPicture(userPicture)
+                            .setUserCurrentAddress(userAddress)
+                            .setUserState(userState)
+                            .setUserCity(userCity)
+                            .clickSubmit()
+                            .checkResultTitle(resultFormTitle)
+                            .checkResultFullName(expectedFullName)
+                            .checkResultUserEmail(userEmail)
+                            .checkResultUserSex(userSex)
+                            .checkResultUserCellPhoneNumber(userCellPhoneNumber)
+                            .checkResultUserBirthDay(userBirthDay, userBirthMonth, userBirthYear)
+                            .checkResultUserSubjects(userSubjects)
+                            .checkResultUserHobby(userHobby)
+                            .checkResultUserPicture(userPicture, userExpectedPicture)
+                            .checkResultUserAddress(userAddress)
+                            .checkResultUserStateAndCity(userState, userCity)
+                            .checkResultCloseButtonClick();
 
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption(userBirthMonth);
-        $(".react-datepicker__year-select").selectOption(userBirthYear);
-        $(".react-datepicker__day--030:not(react-datepicker__day--outside-month)").click(); // not - Это исключение из CSS селектора, мы выбираем 30 -е число именно марта, а не предыдущего месяца
-        $("#subjectsInput").setValue(userSubjects).pressEnter();
-        $("#hobbiesWrapper").$(byText(userHobby)).click(); // выбор хобби
-        $("#uploadPicture").uploadFromClasspath("img/1.jpg");
-        //$("#uploadPicture").uploadFile(new File ("src/test/resources/img/1.jpg"));
-        $("#currentAddress").setValue(userAddress);
-
-        //$("[id=dateOfBirthInput]").setValue("01 Apr 1983");
-        //$("[id=hobbies-checkbox-2").click();
-        $("#state").scrollIntoView(true).click(); // выпадающий список штатов
-        $(byText(userState)).click(); // выбор и клик по штату
-        $("#city").scrollIntoView(true).click(); // работает после выбора штата
-        $(byText(userCity)).click();
-        $("#submit").click();
-
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-        $(".table-responsive").shouldHave(
-                text(expectedfullName),
-                text(userEmail),
-                text(userSex),
-                text(userCellPhoneNumber),
-                text(userBirthDay + " " + userBirthMonth + "," + userBirthYear),
-                text(userSubjects),
-                text(userHobby),
-                text("1.jpg"),
-                text(userAddress),
-                text(userState + " " + userCity));
-        $("#submit").click();
     }
 
 
