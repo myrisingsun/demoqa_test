@@ -19,24 +19,24 @@ import static com.kpaharev.docs.RandomUtils.getRandomString;
 
 public class TestPracticeForm {
 
-    String firstName = getRandomString(10),
-            lastName = getRandomString(10),
-            userEmail = getRandomEmail(),
+    String  FirstName = getRandomString(10),
+            LastName = getRandomString(10),
+            Email = getRandomEmail(),
 
     //String firstName = "Иван",
     //        lastName = "Ivanov",
     //        userEmail = "ivanivanov@gmail.com",
 
-            userSex = "Male",
-            userBirthMonth = "March",
-            userBirthYear = "1983",
-            userBirthDay = "30",
-            userCellPhoneNumber = "896211111123",
-            userSubjects = "Maths",
-            userHobby = "Music",
-            userState = "NCR",
-            userCity = "Delhi",
-            userAddress = "Some street and house";
+            Sex = "Male",
+            BirthMonth = "March",
+            BirthYear = "1983",
+            BirthDay = "30",
+            CellPhoneNumber = "896211111123",
+            Subjects = "Maths",
+            Hobby = "Music",
+            State = "NCR",
+            City = "Delhi",
+            Address = "Some street and house";
 
     @BeforeAll
     static void setUp (){
@@ -64,27 +64,27 @@ public class TestPracticeForm {
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
         //если выбираем Id -то используем #,  если класс то .
         $(".main-header").shouldHave(text("Practice Form"));
-        $("#firstName").setValue(firstName); //$ - Означает сущность веб элемента firstName - это id на страницк данного элемента
-        $("#lastName").setValue(lastName); // Ctrl+D добавляет строку (копирует)
-        $("#userEmail").setValue(userEmail);
-        $("#genterWrapper").$(byText(userSex)).click(); //выбор всего элемента с RadioButton, а не отдельной RadioButton
-        $("#userNumber").setValue(userCellPhoneNumber);
+        $("#firstName").setValue(FirstName); //$ - Означает сущность веб элемента firstName - это id на страницк данного элемента
+        $("#lastName").setValue(LastName); // Ctrl+D добавляет строку (копирует)
+        $("#userEmail").setValue(Email);
+        $("#genterWrapper").$(byText(Sex)).click(); //выбор всего элемента с RadioButton, а не отдельной RadioButton
+        $("#userNumber").setValue(CellPhoneNumber);
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption(userBirthMonth);
-        $(".react-datepicker__year-select").selectOption(userBirthYear);
+        $(".react-datepicker__month-select").selectOption(BirthMonth);
+        $(".react-datepicker__year-select").selectOption(BirthYear);
         $(".react-datepicker__day--030:not(react-datepicker__day--outside-month)").click(); // not - Это исключение из CSS селектора, мы выбираем 30 -е число именно марта, а не предыдущего месяца
-        $("#subjectsInput").setValue(userSubjects).pressEnter();
-        $("#hobbiesWrapper").$(byText(userHobby)).click(); // выбор хобби
+        $("#subjectsInput").setValue(Subjects).pressEnter();
+        $("#hobbiesWrapper").$(byText(Hobby)).click(); // выбор хобби
         $("#uploadPicture").uploadFromClasspath("img/1.jpg");
         //$("#uploadPicture").uploadFile(new File ("src/test/resources/img/1.jpg"));
-        $("#currentAddress").setValue(userAddress);
+        $("#currentAddress").setValue(Address);
 
         //$("[id=dateOfBirthInput]").setValue("01 Apr 1983");
         //$("[id=hobbies-checkbox-2").click();
         $("#state").scrollIntoView(true).click(); // выпадающий список штатов
-        $(byText(userState)).click(); // выбор и клик по штату
+        $(byText(State)).click(); // выбор и клик по штату
         $("#city").scrollIntoView(true).click(); // работает после выбора штата
-        $(byText(userCity)).click();
+        $(byText(City)).click();
         $("#submit").click();
 
         //$("#state").click();
@@ -98,16 +98,16 @@ public class TestPracticeForm {
 
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").shouldHave(
-                text(firstName + " " + lastName),
-                text(userEmail),
-                text(userSex),
-                text(userCellPhoneNumber),
-                text(userBirthDay + " " + userBirthMonth + "," + userBirthYear),
-                text(userSubjects),
-                text(userHobby),
+                text(FirstName + " " + LastName),
+                text(Email),
+                text(Sex),
+                text(CellPhoneNumber),
+                text(BirthDay + " " + BirthMonth + "," + BirthYear),
+                text(Subjects),
+                text(Hobby),
                 text("1.jpg"),
-                text(userAddress),
-                text(userState + " " + userCity));
+                text(Address),
+                text(State + " " + City));
         $("#closeLargeModal").click();
     }
 }
