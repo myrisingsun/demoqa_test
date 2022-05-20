@@ -69,7 +69,5 @@ public class TestPracticeFormFaker {
                             .checkResult(resultFormTitle, expectedFullName, email, sex, cellPhoneNumber, expectedDateOfBirth, subjects, hobby, picture, expectedPicture, address, state, city)
                             .checkResultCloseButtonClick();
     }
-
-
 }
 

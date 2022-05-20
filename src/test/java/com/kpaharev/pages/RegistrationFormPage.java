@@ -130,13 +130,11 @@ public class RegistrationFormPage {
                        .shouldHave(text(userAddress))
                        .shouldHave(text(userState + " " + userCity));
         return this;
-
     }
     public RegistrationFormPage checkResultCloseButtonClick(){
         CheckResultButtonClick.click();
         return this;
     }
-
 }
 
 
