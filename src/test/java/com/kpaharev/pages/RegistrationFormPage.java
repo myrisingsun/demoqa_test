@@ -109,9 +109,7 @@ public class RegistrationFormPage {
                                             String expectedFullName,
                                             String userEmail,
                                             String userSex,
-                                            String userBirthDay,
-                                            String userBirthMonth,
-                                            String userBirthYear,
+                                            String ExpectedDateOfBirth,
                                             String userCellPhoneNumber,
                                             String userSubjects,
                                             String userHobby,
@@ -125,7 +123,7 @@ public class RegistrationFormPage {
                        .shouldHave(text(userEmail))
                        .shouldHave(text(userSex))
                        .shouldHave(text(userCellPhoneNumber))
-                       .shouldHave(text(userBirthDay + " " + userBirthMonth + "," + userBirthYear))
+                       .shouldHave(text(ExpectedDateOfBirth))
                        .shouldHave(text(userSubjects))
                        .shouldHave(text(userHobby))
                        .shouldHave(text(userExpectedPicture))
