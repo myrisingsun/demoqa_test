@@ -16,31 +16,31 @@ public class RegistrationFormPage {
     //locators
     SelenideElement FirstNameInput = $("#firstName"),
                     LastNameInput = $("#lastName"),
-                    UserEmailInput = $("#userEmail"),
-                    UserSexInput = $("#genterWrapper"),
-                    UserCellPhoneInput = $("#userNumber"),
-                    UserDateOfBirthInput = $("#dateOfBirthInput"),
-                    UserSubjectsInput = $("#subjectsInput"),
-                    UserHobbiesInput = $("#hobbiesWrapper"),
-                    UserPictureInput = $("#uploadPicture"),
-                    UserCurrentAddressInput =  $("#currentAddress"),
-                    UserStateInput = $("#state"),
-                    UserCityInput = $("#city"),
+                    EmailInput = $("#userEmail"),
+                    SexInput = $("#genterWrapper"),
+                    CellPhoneInput = $("#userNumber"),
+                    DateOfBirthInput = $("#dateOfBirthInput"),
+                    SubjectsInput = $("#subjectsInput"),
+                    HobbiesInput = $("#hobbiesWrapper"),
+                    PictureInput = $("#uploadPicture"),
+                    CurrentAddressInput =  $("#currentAddress"),
+                    StateInput = $("#state"),
+                    CityInput = $("#city"),
                     SubmitButtonClick = $("#submit"),
-                    resultTitle = $("#example-modal-sizes-title-lg"),
-                    tableResponsive = $(".table-responsive"),
+                    ResultTitle = $("#example-modal-sizes-title-lg"),
+                    TableResponsive = $(".table-responsive"),
                     CheckResultButtonClick = $("#closeLargeModal");
 
     //actions
 
-    public void OpenPage () {
+    public void openPage () {
         open ("/automation-practice-form"); // команда открывает страницу,закрытие автоматическое
         executeJavaScript("$('footer').remove()");
         executeJavaScript("$('fixedban').remove()");
         Selenide.zoom(0.98);
     }
 
-    public void TitleCheck (){
+    public void titleCheck (){
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));//если выбираем Id -то используем #,  если класс то .
         $(".main-header").shouldHave(text("Practice Form"));
     }
@@ -55,46 +55,46 @@ public class RegistrationFormPage {
         return this;
     }
     public RegistrationFormPage setUserEmail(String userEmail){
-        UserEmailInput.setValue(userEmail);
+        EmailInput.setValue(userEmail);
         return this;
     }
     public RegistrationFormPage setUserSex(String userSex){
-        UserSexInput.$(byText(userSex)).click(); //выбор всего элемента с RadioButton, а не отдельной RadioButton
+        SexInput.$(byText(userSex)).click(); //выбор всего элемента с RadioButton, а не отдельной RadioButton
         return this;
     }
     public RegistrationFormPage setUserCellPhoneNumber(String userCellPhoneNumber){
-        UserCellPhoneInput.setValue(userCellPhoneNumber);
+        CellPhoneInput.setValue(userCellPhoneNumber);
         return this;
     }
     public RegistrationFormPage setDateOfBirth(String day, String month, String year){
-        UserDateOfBirthInput.click();
+        DateOfBirthInput.click();
         calendar.setDate(day, month, year); //Вынесено в отдельный компонент
         return this;
     }
     public RegistrationFormPage setUserSubjects(String userSubjects){
-       UserSubjectsInput.setValue(userSubjects).pressEnter();
+        SubjectsInput.setValue(userSubjects).pressEnter();
         return this;
     }
     public RegistrationFormPage setUserHobbies(String userHobby){
-        UserHobbiesInput.$(byText(userHobby)).click();
+        HobbiesInput.$(byText(userHobby)).click();
         return this;
     }
     public RegistrationFormPage setUserPicture(String userPicture){
-        UserPictureInput.uploadFromClasspath(userPicture);
-        //UserPictureInput.uploadFile(new File ("src/test/resources/img/1.jpg"));
+        PictureInput.uploadFromClasspath(userPicture);
+        //PictureInput.uploadFile(new File ("src/test/resources/img/1.jpg"));
         return this;
     }
     public RegistrationFormPage setUserCurrentAddress(String userAddress){
-        UserCurrentAddressInput.setValue(userAddress);
+        CurrentAddressInput.setValue(userAddress);
         return this;
     }
     public RegistrationFormPage setUserState(String userState){
-        UserStateInput.scrollIntoView(true).click(); // выпадающий список штатов
+        StateInput.scrollIntoView(true).click(); // выпадающий список штатов
         $(byText(userState)).click(); // выбор и клик по штату
         return this;
     }
     public RegistrationFormPage setUserCity(String userCity){
-        UserCityInput.scrollIntoView(true).click(); // работает после выбора штата
+        CityInput.scrollIntoView(true).click(); // работает после выбора штата
         $(byText(userCity)).click();
         return this;
     }
@@ -103,56 +103,90 @@ public class RegistrationFormPage {
         return this;
     }
 
-    //asserts
+    //asserts - проверки
 
-    public RegistrationFormPage checkResultTitle(String resultFormTitle) {
-        resultTitle.shouldHave(text(resultFormTitle));
+    public RegistrationFormPage checkResult(String resultFormTitle,
+                                            String expectedFullName,
+                                            String userEmail,
+                                            String userSex,
+                                            String userBirthDay,
+                                            String userBirthMonth,
+                                            String userBirthYear,
+                                            String userCellPhoneNumber,
+                                            String userSubjects,
+                                            String userHobby,
+                                            String userPicture,
+                                            String userExpectedPicture,
+                                            String userAddress,
+                                            String userState,
+                                            String userCity) {
+        ResultTitle.shouldHave(text(resultFormTitle));
+        TableResponsive.shouldHave(text(expectedFullName))
+                       .shouldHave(text(userEmail))
+                       .shouldHave(text(userSex))
+                       .shouldHave(text(userCellPhoneNumber))
+                       .shouldHave(text(userBirthDay + " " + userBirthMonth + "," + userBirthYear))
+                       .shouldHave(text(userSubjects))
+                       .shouldHave(text(userHobby))
+                       .shouldHave(text(userExpectedPicture))
+                       .shouldHave(text(userAddress))
+                       .shouldHave(text(userState + " " + userCity));
         return this;
-    }
-    public RegistrationFormPage checkResultFullName(String expectedFullName) {
-        tableResponsive.shouldHave(text(expectedFullName));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserEmail(String userEmail) {
-        tableResponsive.shouldHave(text(userEmail));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserSex(String userSex) {
-        tableResponsive.shouldHave(text(userSex));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserCellPhoneNumber(String userCellPhoneNumber) {
-        tableResponsive.shouldHave(text(userCellPhoneNumber));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserBirthDay(String userBirthDay, String userBirthMonth, String userBirthYear) {
-        tableResponsive.shouldHave(text(userBirthDay + " " + userBirthMonth + "," + userBirthYear));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserSubjects(String userSubjects) {
-        tableResponsive.shouldHave(text(userSubjects));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserHobby(String userHobby) {
-        tableResponsive.shouldHave(text(userHobby));
-        return this;
-    }
 
-    public RegistrationFormPage checkResultUserPicture(String userPicture, String userExpectedPicture) {
-        tableResponsive.shouldHave(text(userExpectedPicture));
-        return this;
-    }
-
-    public RegistrationFormPage checkResultUserAddress(String userAddress) {
-        tableResponsive.shouldHave(text(userAddress));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserStateAndCity(String userState, String userCity) {
-        tableResponsive.shouldHave(text(userState + " " + userCity));
-        return this;
     }
     public RegistrationFormPage checkResultCloseButtonClick(){
         CheckResultButtonClick.click();
         return this;
     }
+
+
 }
+
+    /* public RegistrationFormPage checkResultTitle(String resultFormTitle) {
+        ResultTitle.shouldHave(text(resultFormTitle));
+        return this;
+    }
+    public RegistrationFormPage checkResultFullName(String expectedFullName) {
+        TableResponsive.shouldHave(text(expectedFullName));
+        return this;
+    }
+    public RegistrationFormPage checkResultUserEmail(String userEmail) {
+        TableResponsive.shouldHave(text(userEmail));
+        return this;
+    }
+    public RegistrationFormPage checkResultUserSex(String userSex) {
+        TableResponsive.shouldHave(text(userSex));
+        return this;
+    }
+    public RegistrationFormPage checkResultUserCellPhoneNumber(String userCellPhoneNumber) {
+        TableResponsive.shouldHave(text(userCellPhoneNumber));
+        return this;
+    }
+    public RegistrationFormPage checkResultUserBirthDay(String userBirthDay, String userBirthMonth, String userBirthYear) {
+        TableResponsive.shouldHave(text(userBirthDay + " " + userBirthMonth + "," + userBirthYear));
+        return this;
+    }
+    public RegistrationFormPage checkResultUserSubjects(String userSubjects) {
+        TableResponsive.shouldHave(text(userSubjects));
+        return this;
+    }
+    public RegistrationFormPage checkResultUserHobby(String userHobby) {
+        TableResponsive.shouldHave(text(userHobby));
+        return this;
+    }
+
+    public RegistrationFormPage checkResultUserPicture(String userPicture, String userExpectedPicture) {
+        TableResponsive.shouldHave(text(userExpectedPicture));
+        return this;
+    }
+
+    public RegistrationFormPage checkResultUserAddress(String userAddress) {
+        TableResponsive.shouldHave(text(userAddress));
+        return this;
+    }
+    public RegistrationFormPage checkResultUserStateAndCity(String userState, String userCity) {
+        TableResponsive.shouldHave(text(userState + " " + userCity));
+        return this;
+    }*/
+
+

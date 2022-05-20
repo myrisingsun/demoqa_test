@@ -20,24 +20,24 @@ public class TestPracticeFormFaker {
     Faker faker = new Faker();
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
 
-    String firstName = faker.name().firstName(),
-            lastName = faker.name().lastName(),
-            userEmail = faker.internet().emailAddress(),
-            expectedFullName = String.format("%s %s", firstName, lastName),
-            userSex = "Male",
-            userBirthMonth = "March",
-            userBirthYear = "1983",
-            userBirthDay = "30",
+    String  FirstName = faker.name().firstName(),
+            LastName = faker.name().lastName(),
+            Email = faker.internet().emailAddress(),
+            ExpectedFullName = String.format("%s %s", FirstName, LastName),
+            Sex = "Male",
+            BirthMonth = "May",
+            BirthYear = "1983",
+            BirthDay = "30",
             //dateOfBirth = String.format("%s %s,%s", userBirthDay, userBirthMonth, userBirthYear),
-            userCellPhoneNumber = "0123456789",
-            userSubjects = "Maths",
-            userHobby = "Music",
-            userPicture = "img/1.jpg",
-            userExpectedPicture = "1.jpg",
-            userState = "NCR",
-            userCity = "Delhi",
-            userAddress = "Some street and house",
-            resultFormTitle = "Thanks for submitting the form";
+            CellPhoneNumber = "0123456789",
+            Subjects = "Maths",
+            Hobby = "Music",
+            Picture = "img/1.jpg",
+            ExpectedPicture = "1.jpg",
+            State = "NCR",
+            City = "Delhi",
+            Address = "Some street and house",
+            ResultFormTitle = "Thanks for submitting the form";
 
     @DisplayName("Setup of test")
     @BeforeAll
@@ -51,33 +51,36 @@ public class TestPracticeFormFaker {
     @DisplayName("Fill form")
     @Test
     void openPage (){
-        registrationFormPage.OpenPage(); // содержимое вынесено в отдельный класс в файле RegistrationFormPage.java
-        registrationFormPage.TitleCheck();
-        registrationFormPage.setFirstName(firstName)
-                            .setLastName(lastName)
-                            .setUserEmail(userEmail)
-                            .setUserSex(userSex)
-                            .setUserCellPhoneNumber(userCellPhoneNumber)
-                            .setDateOfBirth(userBirthDay, userBirthMonth, userBirthYear)
-                            .setUserSubjects(userSubjects)
-                            .setUserHobbies(userHobby)
-                            .setUserPicture(userPicture)
-                            .setUserCurrentAddress(userAddress)
-                            .setUserState(userState)
-                            .setUserCity(userCity)
+        registrationFormPage.openPage(); // содержимое вынесено в отдельный класс в файле RegistrationFormPage.java
+        registrationFormPage.titleCheck();;
+        registrationFormPage.setFirstName(FirstName)
+                            .setLastName(LastName)
+                            .setUserEmail(Email)
+                            .setUserSex(Sex)
+                            .setUserCellPhoneNumber(CellPhoneNumber)
+                            .setDateOfBirth(BirthDay, BirthMonth, BirthYear)
+                            .setUserSubjects(Subjects)
+                            .setUserHobbies(Hobby)
+                            .setUserPicture(Picture)
+                            .setUserCurrentAddress(Address)
+                            .setUserState(State)
+                            .setUserCity(City)
                             .clickSubmit()
-                            .checkResultTitle(resultFormTitle)
-                            .checkResultFullName(expectedFullName)
-                            .checkResultUserEmail(userEmail)
-                            .checkResultUserSex(userSex)
-                            .checkResultUserCellPhoneNumber(userCellPhoneNumber)
-                            .checkResultUserBirthDay(userBirthDay, userBirthMonth, userBirthYear)
-                            .checkResultUserSubjects(userSubjects)
-                            .checkResultUserHobby(userHobby)
-                            .checkResultUserPicture(userPicture, userExpectedPicture)
-                            .checkResultUserAddress(userAddress)
-                            .checkResultUserStateAndCity(userState, userCity)
+                            .checkResult(ResultFormTitle, ExpectedFullName, Email, Sex, CellPhoneNumber, BirthDay, BirthMonth, BirthYear, Subjects, Hobby, Picture, ExpectedPicture, Address, State, City)
                             .checkResultCloseButtonClick();
+
+                            /* .checkResultTitle(ResultFormTitle)
+                            .checkResultFullName(ExpectedFullName)
+                            .checkResultUserEmail(Email);
+                            .checkResultUserSex(Sex)
+                            .checkResultUserCellPhoneNumber(CellPhoneNumber)
+                            .checkResultUserBirthDay(BirthDay, BirthMonth, BirthYear)
+                            .checkResultUserSubjects(Subjects)
+                            .checkResultUserHobby(Hobby)
+                            .checkResultUserPicture(Picture, ExpectedPicture)
+                            .checkResultUserAddress(Address)
+                            .checkResultUserStateAndCity(State, City)*/
+
 
     }
 
