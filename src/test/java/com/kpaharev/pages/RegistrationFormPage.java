@@ -137,54 +137,7 @@ public class RegistrationFormPage {
         return this;
     }
 
-
 }
 
-    /* public RegistrationFormPage checkResultTitle(String resultFormTitle) {
-        ResultTitle.shouldHave(text(resultFormTitle));
-        return this;
-    }
-    public RegistrationFormPage checkResultFullName(String expectedFullName) {
-        TableResponsive.shouldHave(text(expectedFullName));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserEmail(String userEmail) {
-        TableResponsive.shouldHave(text(userEmail));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserSex(String userSex) {
-        TableResponsive.shouldHave(text(userSex));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserCellPhoneNumber(String userCellPhoneNumber) {
-        TableResponsive.shouldHave(text(userCellPhoneNumber));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserBirthDay(String userBirthDay, String userBirthMonth, String userBirthYear) {
-        TableResponsive.shouldHave(text(userBirthDay + " " + userBirthMonth + "," + userBirthYear));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserSubjects(String userSubjects) {
-        TableResponsive.shouldHave(text(userSubjects));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserHobby(String userHobby) {
-        TableResponsive.shouldHave(text(userHobby));
-        return this;
-    }
-
-    public RegistrationFormPage checkResultUserPicture(String userPicture, String userExpectedPicture) {
-        TableResponsive.shouldHave(text(userExpectedPicture));
-        return this;
-    }
-
-    public RegistrationFormPage checkResultUserAddress(String userAddress) {
-        TableResponsive.shouldHave(text(userAddress));
-        return this;
-    }
-    public RegistrationFormPage checkResultUserStateAndCity(String userState, String userCity) {
-        TableResponsive.shouldHave(text(userState + " " + userCity));
-        return this;
-    }*/
 
 
